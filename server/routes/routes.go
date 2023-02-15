@@ -1,0 +1,16 @@
+package routes
+
+import (
+	"net/http"
+
+	"github.com/yusrililhm/to-do-app/server/api"
+)
+
+func Routes()  {
+
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "http://localhost:3000", http.StatusSeeOther)
+	})
+
+	api.InsertOne()
+}

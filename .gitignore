@@ -4,6 +4,12 @@
 /node_modules
 /.pnp
 .pnp.js
+go.sum
+
+#package and config
+package-lock.json
+package.json
+tailwind.config.js
 
 # testing
 /coverage
