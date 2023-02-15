@@ -13,4 +13,6 @@ func Routes()  {
 	})
 
 	http.HandleFunc("/Add", api.InsertOne)
+
+	http.HandleFunc("/Find", api.Show)
 }
