@@ -13,14 +13,22 @@ const ToDoList = () => {
                 </form>
             </div>
             <table>
+                <thead>
+                    <tr>
+                        <td className='text-center'>Todo</td>
+                        <td className='text-center'>Actions</td>
+                    </tr>
+                </thead>
+                <tbody>
                 <tr>
                     <td>{}</td>
                     <td>
-                        <a href='/done' className='text-green-500'><FontAwesomeIcon icon={faCircleCheck} /></a>
-                        <a href='/update' className='text-yellow-500' ><FontAwesomeIcon icon={faPen} /></a>
-                        <a href='/delete' className='text-red-500' ><FontAwesomeIcon icon={faCircleXmark} /></a>
+                        <a href='/done' className='text-green-500 mx-1'><FontAwesomeIcon icon={faCircleCheck} /></a>
+                        <a href='/update' className='text-yellow-500 mx-1'><FontAwesomeIcon icon={faPen} /></a>
+                        <a href='/delete' className='text-red-500 mx-1'><FontAwesomeIcon icon={faCircleXmark} /></a>
                     </td>
                 </tr>
+                </tbody>
             </table>
         </section>
     );
