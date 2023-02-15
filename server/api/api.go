@@ -14,7 +14,7 @@ func InsertOne()  {
 		log.Fatal(err.Error())
 	}
 
-	todo := "Hello world, i want to be golang web developer"
+	todo := ""
 
 	_, err = db.Collection("todolist").InsertOne(context.Background(), models.ToDoList{Todo: todo})
 	if err != nil {
