@@ -9,5 +9,5 @@ type ToDoList struct {
 
 type ToDo struct {
 	ID primitive.ObjectID `bson:"_id"`
-	ToDoList string `bson:"todo"`
+	Todo string `bson:"todo"`
 }

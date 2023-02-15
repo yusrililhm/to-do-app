@@ -13,6 +13,6 @@ func Routes()  {
 	})
 
 	http.HandleFunc("/Add", api.InsertOne)
-
+	http.HandleFunc("/Delete", api.DeleteOne)
 	http.HandleFunc("/Find", api.Show)
 }

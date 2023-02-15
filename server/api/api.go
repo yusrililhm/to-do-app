@@ -34,7 +34,7 @@ func DeleteOne(w http.ResponseWriter, r *http.Request)  {
 		log.Fatal(err.Error())
 	}
 
-	_, err = db.Collection("todolist").DeleteOne(context.Background(), bson.D{})
+	_, err = db.Collection("todolist").DeleteOne(context.Background(), models.ToDoList{Todo: ""})
 	if err != nil {
 		log.Fatal(err.Error())
 	}
