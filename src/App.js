@@ -1,10 +1,10 @@
 import './assets/css/index.css';
-import Todo from './content/todo';
+import ToDoList from './content/todo';
 
 function App() {
   return (
     <section className="font-Poppins">
-      <Todo></Todo>
+      <ToDoList/>
     </section>
   );
 }

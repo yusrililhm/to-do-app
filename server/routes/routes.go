@@ -12,7 +12,7 @@ func Routes()  {
 		http.Redirect(w, r, "http://localhost:3000", http.StatusSeeOther)
 	})
 
-	http.HandleFunc("/Add", api.InsertOne)
-	http.HandleFunc("/Delete", api.DeleteOne)
-	http.HandleFunc("/Find", api.Show)
+	http.HandleFunc("/add", api.InsertOne)
+	http.HandleFunc("/delete", api.DeleteOne)
+	http.HandleFunc("/find", api.Show)
 }

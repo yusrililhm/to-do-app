@@ -1,6 +1,10 @@
-import '../assets/css/index.css'
+import '../assets/css/index.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
 
-function Todo() {
+const ToDoList = () => {
     return (
         <section className='font-Poppins h-screen'>
             <div className='flex justify-center items-center'>
@@ -8,8 +12,18 @@ function Todo() {
                     <input type='text' name='todo' id='todo' placeholder='Type your plan here' className='w-full'/>
                 </form>
             </div>
+            <table>
+                <tr>
+                    <td>{}</td>
+                    <td>
+                        <a href='/done' className='text-green-500'><FontAwesomeIcon icon={faCircleCheck} /></a>
+                        <a href='/update' className='text-yellow-500' ><FontAwesomeIcon icon={faPen} /></a>
+                        <a href='/delete' className='text-red-500' ><FontAwesomeIcon icon={faCircleXmark} /></a>
+                    </td>
+                </tr>
+            </table>
         </section>
     );
 }
 
-export default Todo;
+export default ToDoList;
