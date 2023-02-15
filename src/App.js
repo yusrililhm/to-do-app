@@ -1,10 +1,11 @@
 import './assets/css/index.css';
+import Todo from './content/todo';
 
 function App() {
   return (
-    <div className="font-Poppins">
-      <h1 className='text-pink-500'>Hello World</h1>
-    </div>
+    <section className="font-Poppins">
+      <Todo></Todo>
+    </section>
   );
 }
 

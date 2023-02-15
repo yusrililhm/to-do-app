@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 go.sum
+.idea
 
 #package and config
 package-lock.json

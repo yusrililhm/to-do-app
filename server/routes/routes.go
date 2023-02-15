@@ -12,5 +12,5 @@ func Routes()  {
 		http.Redirect(w, r, "http://localhost:3000", http.StatusSeeOther)
 	})
 
-	api.InsertOne()
+	http.HandleFunc("/Add", api.InsertOne)
 }
