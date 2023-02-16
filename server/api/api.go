@@ -2,7 +2,6 @@ package api
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -12,20 +11,17 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 )
 
-func InsertOne(w http.ResponseWriter, r *http.Request)  {
+func InsertOne(todo models.ToDoList)  {
 	db, err := database.ConnectMongo()
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 
-	todo := r.FormValue("todo")
-
-	_, err = db.Collection("todolist").InsertOne(context.Background(), models.ToDoList{Todo: todo})
+	insert, err := db.Collection("todolist").InsertOne(context.Background(), todo)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	
-	http.Redirect(w, r, "/find", http.StatusSeeOther)
+	fmt.Println("Insert Successfull", insert.InsertedID)	
 }
 
 func DeleteOne(w http.ResponseWriter, r *http.Request)  {
@@ -56,28 +52,31 @@ func Update(w http.ResponseWriter, r *http.Request)  {
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
 
-func Show(w http.ResponseWriter, r *http.Request)  {
+func Show() []models.ToDo {
 	db, err := database.ConnectMongo()
 	if err != nil {
 		log.Fatal(err.Error())
 	}
+
+	var results []models.ToDo
 
 	doc, err := db.Collection("todolist").Find(context.Background(), bson.D{{}})
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 
-	var results []models.ToDo
-	if err = doc.All(context.Background(), &results); err != nil {
-		log.Fatal(err.Error())
-	}
-
-	for _, result := range results {
-		doc.Decode(&result)
-		output, err := json.MarshalIndent(result, "", "  ")
+	for doc.Next(context.Background()) {
+		var result models.ToDo
+		err := doc.Decode(&result)
 		if err != nil {
 			log.Fatal(err.Error())
 		}
-		fmt.Fprintf(w, "%s\n", output)
+		results = append(results, result)
 	}
+
+	if err := doc.Err() ;err != nil {
+		log.Fatal(err.Error())
+	}
+
+	return results
 }

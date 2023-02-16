@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	routes.Routes()
+	r := routes.Routes()
 	fmt.Println("Server Is Running ON PORT 8000")
-	http.ListenAndServe(":8000", nil)
+	http.ListenAndServe(":8000", r)
 }
