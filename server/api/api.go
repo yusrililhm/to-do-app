@@ -25,7 +25,7 @@ func InsertOne(w http.ResponseWriter, r *http.Request)  {
 		log.Fatal(err.Error())
 	}
 	
-	http.Redirect(w, r, "/", http.StatusSeeOther)
+	http.Redirect(w, r, "/find", http.StatusSeeOther)
 }
 
 func DeleteOne(w http.ResponseWriter, r *http.Request)  {
