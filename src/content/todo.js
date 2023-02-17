@@ -65,9 +65,9 @@ class ToDo extends Component {
                                         <div className='mx-3'>{item.Todo}</div>
                                     </Card.Header>
                                     <Card.Meta>
-                                        <a href='/done' className='text-green-500 mx-1'><FontAwesomeIcon icon={faCheckSquare} /></a>
-                                        <a href='/update' className='text-yellow-500 mx-1'><FontAwesomeIcon icon={faPenSquare} /></a>
-                                        <a href='/delete' className='text-red-500 mx-1'><FontAwesomeIcon icon={faXmarkSquare} /></a>
+                                        <FontAwesomeIcon icon={faCheckSquare} className='text-green-500 mx-1'/>
+                                        <FontAwesomeIcon icon={faPenSquare} className='text-yellow-500 mx-1' />
+                                        <FontAwesomeIcon icon={faXmarkSquare} onClick={() => this.deleteById(item.ID)} className='text-red-500 mx-1'/>
                                     </Card.Meta>
                                 </Card.Content>
                             </Card>
@@ -81,6 +81,18 @@ class ToDo extends Component {
             }
         })
     };
+    deleteById = (ID) => {
+        axios
+        .delete(endpoint + "/api/delete/" + ID, {
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+        })
+        .then((res) => {
+            console.log(res);
+            this.showTodo()
+        })
+    }
     render() {
         return (
             <section className='h-screen'>
