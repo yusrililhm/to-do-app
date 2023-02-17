@@ -5,15 +5,16 @@ import { faXmarkSquare } from '@fortawesome/free-solid-svg-icons';
 import { faPenSquare } from '@fortawesome/free-solid-svg-icons';
 import { Component } from 'react';
 import axios from 'axios';
+import { Card } from 'semantic-ui-react';
 
 let endpoint = "http://localhost:8000";
 
-class ToDoList extends Component {
+class ToDo extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            todo: "",
+            Todo: "",
             items: []
         }
     };
@@ -28,13 +29,13 @@ class ToDoList extends Component {
     }
 
     onSubmit = () => {
-        let { todo } = this.state;
-        if (todo) {
+        let { Todo } = this.state;
+        if (Todo) {
             axios
             .post(
                 endpoint + "/api/insert",
                 {
-                    todo
+                    Todo
                 },
                 {
                     headers: {
@@ -45,39 +46,45 @@ class ToDoList extends Component {
             .then (res => {
                 this.showTodo();
                 this.setState({
-                    todo: ""
+                    Todo: ""
                 });
                 console.log(res)
             })
         }
     }
     showTodo = () => {
-        axios.get(endpoint + "/a[i/show").then(res => {
+        axios.get(endpoint + "/api/show").then(res => {
             console.log(res.data)
             if (res.data) {
                 this.setState({
                     items: res.data.map(item => {
                         return (
-                            <section className='font-Poppins h-screen'>
-                            <table className='m-auto mt-4 justify-center items-center shadow-lg bg-white w-3/5 h-20'>
-                                {/* <thead>
-                                    <tr>
-                                        <td className='text-center'>Todo</td>
-                                        <td className='text-center'>Actions</td>
-                                    </tr>
-                                </thead> */}
-                                <tbody className=''>
-                                <tr key={item._id}>
-                                    <td className='w-5/6'>{item.todo}</td>
-                                    <td className='text-center'>
+                            <Card key={item.ID}>
+                                <Card.Content className='flex justify-center items-center w-3/5 bg-white my-4 text-black h-16 shadow-md rounded-md m-auto'>
+                                    <Card.Header className='w-5/6'>
+                                        <div className='mx-3'>{item.Todo}</div>
+                                    </Card.Header>
+                                    <Card.Meta>
                                         <a href='/done' className='text-green-500 mx-1'><FontAwesomeIcon icon={faCheckSquare} /></a>
                                         <a href='/update' className='text-yellow-500 mx-1'><FontAwesomeIcon icon={faPenSquare} /></a>
                                         <a href='/delete' className='text-red-500 mx-1'><FontAwesomeIcon icon={faXmarkSquare} /></a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </section>
+                                    </Card.Meta>
+                                </Card.Content>
+                            </Card>
+                            // <section className='font-Poppins h-screen'>
+                            //     <table className='m-auto mt-4 justify-center items-center shadow-lg bg-white w-3/5 h-20' key={item._id}>
+                            //         <tbody className='' key={item._id}>
+                            //         <tr key={item._id}>
+                            //             <td className='w-5/6'>{item.todo}</td>
+                            //             <td className='text-center'>
+                            //                 <a href='/done' className='text-green-500 mx-1'><FontAwesomeIcon icon={faCheckSquare} /></a>
+                            //                 <a href='/update' className='text-yellow-500 mx-1'><FontAwesomeIcon icon={faPenSquare} /></a>
+                            //                 <a href='/delete' className='text-red-500 mx-1'><FontAwesomeIcon icon={faXmarkSquare} /></a>
+                            //             </td>
+                            //         </tr>
+                            //         </tbody>
+                            //     </table>
+                            // </section>
                         )
                     })
                 })
@@ -90,13 +97,25 @@ class ToDoList extends Component {
     };
     render() {
         return (
-            <div className='flex justify-center items-center'>
-                <form onSubmit={this.onSubmit} action='/api/add' className='flex justify-center items-center mt-20 bg-white shadow-lg py-2 rounded-md w-3/5'>
-                    <input type='text' name='todo' id='todo' placeholder='Type your plan here' className='mx-4 w-full' onChange={this.onChange} value={this.state.todo}/>
-                </form>
-            </div>
+            <section className='h-screen'>
+                <div className='flex justify-center items-center'>
+                    <form onSubmit={this.onSubmit} className='flex justify-center items-center mt-20 bg-white shadow-lg py-2 rounded-md w-3/5'>
+                        <input 
+                        type='text' 
+                        name='Todo' 
+                        id='todo' 
+                        placeholder='Type your plan here' 
+                        className='w-full mx-4' 
+                        onChange={this.onChange}
+                        />
+                    </form>
+                </div>
+                <div className=''>
+                    <Card.Group className=''>{this.state.items}</Card.Group>
+                </div>
+            </section>
         )
     }
 };
 
-export default ToDoList;
+export default ToDo;

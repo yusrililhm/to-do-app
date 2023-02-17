@@ -11,13 +11,15 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 )
 
-func InsertOne(todo models.ToDoList)  {
+func InsertOne(w http.ResponseWriter, r *http.Request)  {
 	db, err := database.ConnectMongo()
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 
-	insert, err := db.Collection("todolist").InsertOne(context.Background(), todo)
+	Todo := r.FormValue("Todo")
+
+	insert, err := db.Collection("todolist").InsertOne(context.Background(), models.ToDoList{Todo: Todo})
 	if err != nil {
 		log.Fatal(err.Error())
 	}
@@ -30,7 +32,7 @@ func DeleteOne(w http.ResponseWriter, r *http.Request)  {
 		log.Fatal(err.Error())
 	}
 
-	_, err = db.Collection("todolist").DeleteOne(context.Background(), models.ToDoList{Todo: ""})
+	_, err = db.Collection("todolist").DeleteMany(context.Background(), models.ToDoList{Todo: ""})
 	if err != nil {
 		log.Fatal(err.Error())
 	}
@@ -74,7 +76,7 @@ func Show() []models.ToDo {
 		results = append(results, result)
 	}
 
-	if err := doc.Err() ;err != nil {
+	if err := doc.Err(); err != nil {
 		log.Fatal(err.Error())
 	}
 
