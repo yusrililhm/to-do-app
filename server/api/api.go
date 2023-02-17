@@ -2,7 +2,6 @@ package api
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"net/http"
 
@@ -19,11 +18,11 @@ func InsertOne(w http.ResponseWriter, r *http.Request)  {
 
 	Todo := r.FormValue("Todo")
 
-	insert, err := db.Collection("todolist").InsertOne(context.Background(), models.ToDoList{Todo: Todo})
+	_, err = db.Collection("todolist").InsertOne(context.Background(), models.ToDoList{Todo: Todo})
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	fmt.Println("Insert Successfull", insert.InsertedID)	
+	http.Redirect(w, r, "http://localhost:3000", http.StatusSeeOther)
 }
 
 func DeleteOne(w http.ResponseWriter, r *http.Request)  {

@@ -71,20 +71,6 @@ class ToDo extends Component {
                                     </Card.Meta>
                                 </Card.Content>
                             </Card>
-                            // <section className='font-Poppins h-screen'>
-                            //     <table className='m-auto mt-4 justify-center items-center shadow-lg bg-white w-3/5 h-20' key={item._id}>
-                            //         <tbody className='' key={item._id}>
-                            //         <tr key={item._id}>
-                            //             <td className='w-5/6'>{item.todo}</td>
-                            //             <td className='text-center'>
-                            //                 <a href='/done' className='text-green-500 mx-1'><FontAwesomeIcon icon={faCheckSquare} /></a>
-                            //                 <a href='/update' className='text-yellow-500 mx-1'><FontAwesomeIcon icon={faPenSquare} /></a>
-                            //                 <a href='/delete' className='text-red-500 mx-1'><FontAwesomeIcon icon={faXmarkSquare} /></a>
-                            //             </td>
-                            //         </tr>
-                            //         </tbody>
-                            //     </table>
-                            // </section>
                         )
                     })
                 })
@@ -99,7 +85,7 @@ class ToDo extends Component {
         return (
             <section className='h-screen'>
                 <div className='flex justify-center items-center'>
-                    <form onSubmit={this.onSubmit} className='flex justify-center items-center mt-20 bg-white shadow-lg py-2 rounded-md w-3/5'>
+                    <form method='post' action='/api/insert' className='flex justify-center items-center mt-20 bg-white shadow-lg py-2 rounded-md w-3/5'>
                         <input 
                         type='text' 
                         name='Todo' 
